@@ -26,7 +26,8 @@
         </p>
 
         <p>
-            <select onchange="changeInputPanel('graph1', 'input1')" id="graph1">
+            <label>Equation One</label>
+            <select onchange="changeInputPanel('graph1', 'input1', '1')" id="graph1">
                 <option value="const">c</option>
                 <option value="linear">a(x + b)</option>
                 <option value="deg2">a(x + b)^2<option>
@@ -39,7 +40,8 @@
         </p>
 
         <p>
-            <select id="graph2">
+            <label>Equation Two</label>
+            <select onchange="changeInputPanel('graph2', 'input2', '2')" id="graph2">
                 <option value="const">c</option>
                 <option value="linear">a(x + b)</option>
                 <option value="deg2">a(x + b)^2</option>
@@ -52,12 +54,12 @@
         </p>
 
         <p>
-            <submit onclick="run">Graph</submit>
+            <button onclick="run()">Graph</button>
         </p>
 
     </body>
     <script>
-        function changeInputPanel(inputId, panelId) {
+        function changeInputPanel(inputId, panelId, n) {
             function createNumInput(id) {
                 let out = document.createElement("input");
                 
@@ -90,20 +92,28 @@
                 case 'const':
 
                     let label = createLabel('c');
-                    let c = createNumInput('num_c');
+                    let c = createNumInput('num_c' + n);
 
                     panelPnt.appendChild(label);
                     panelPnt.appendChild(c);
 
                     break;
                 case 'linear':
-
-                    let labelA = c
-
-                    break;
                 case 'deg2':
 
+                    let labelA = createLabel('a');
+                    let a = createNumInput('num_a' + n);
+
+                    let labelB = createLabel('b');
+                    let b = createNumInput('num_b' + n);
+
+                    panelPnt.appendChild(labelA);
+                    panelPnt.appendChild(a);
+                    panelPnt.appendChild(labelB);
+                    panelPnt.appendChild(b);
+
                     break;
+                
                 default:
                     console.log('Error, the equation-code is wrong.')
             }
