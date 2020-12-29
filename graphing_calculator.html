@@ -13,10 +13,101 @@
         <h1>Polynomial Graphing Calculator</h1>
         <canvas id="canvas"></canvas>
 
-        
+        <h2>Input</h2>
+
+        <div id="showEqu"></div>
+
+        <p>
+            <select id="comboType">
+                <option value="add">Addition</option>
+                <option value="mult">Multiplication</option>
+            </select>
+
+        </p>
+
+        <p>
+            <select onchange="changeInputPanel('graph1', 'input1')" id="graph1">
+                <option value="const">c</option>
+                <option value="linear">a(x + b)</option>
+                <option value="deg2">a(x + b)^2<option>
+            </select>
+
+            <div id="input1">
+                <label>Value</label>
+                <input type="number" min="-10" max="10">
+            </div>
+        </p>
+
+        <p>
+            <select id="graph2">
+                <option value="const">c</option>
+                <option value="linear">a(x + b)</option>
+                <option value="deg2">a(x + b)^2</option>
+            </select>
+
+            <div id="input2">
+                <label>Value</label>
+                <input type="number" min="-10" max="10">
+            </div>
+        </p>
+
+        <p>
+            <submit onclick="run">Graph</submit>
+        </p>
 
     </body>
     <script>
+        function changeInputPanel(inputId, panelId) {
+            function createNumInput(id) {
+                let out = document.createElement("input");
+                
+                out.setAttribute('type', 'number');
+                out.setAttribute('min', '-10');
+                out.setAttribute('max', "10");
+                out.setAttribute('id', id);
+                
+                return out;
+            }
+
+            function createLabel(text) {
+                let lab = document.createElement('label');
+                let str = document.createTextNode(text);
+
+                lab.appendChild(str);
+
+                return lab;
+            }
+
+            let code = document.getElementById(inputId).value;
+            let panelPnt = document.getElementById(panelId);
+
+            Array.from(panelPnt.children).forEach(
+                function (e0) {
+                    e0.remove();
+            });
+
+            switch(code) {
+                case 'const':
+
+                    let label = createLabel('c');
+                    let c = createNumInput('num_c');
+
+                    panelPnt.appendChild(label);
+                    panelPnt.appendChild(c);
+
+                    break;
+                case 'linear':
+
+                    let labelA = c
+
+                    break;
+                case 'deg2':
+
+                    break;
+                default:
+                    console.log('Error, the equation-code is wrong.')
+            }
+        }
         
     </script>
 </html>
