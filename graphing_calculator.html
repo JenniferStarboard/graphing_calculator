@@ -3,15 +3,13 @@
         <meta charset="utf-8">
         <style>
             canvas {
-                height: 1000px;
-                width: 1000px;
                 border: 5px solid black; 
             }
         </style>
     </head> 
     <body>
         <h1>Polynomial Graphing Calculator</h1>
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" height="1000px" width="1000px"></canvas>
 
         <h2>Input</h2>
 
@@ -119,17 +117,22 @@
             }
         }
         
-        function horizontalLine() {
+        function axisLines() {
             let pnt = document.getElementById('canvas');
-            pnt.getContext('2d');
+            let can = pnt.getContext('2d');
 
-            pnt.moveTo(0, 500);
-            pnt.lineTo(1000, 500);
-            pnt.stroke();
+            can.strokeStyle = '#000000';
+            can.moveTo(0, 500);
+            can.lineTo(1000, 500);
+            can.stroke();
+
+            can.moveTo(500, 0);
+            can.lineTo(500, 1000);
+            can.stroke();
 
         }
 
-        horizontalLine();
+        axisLines();
 
         
 
