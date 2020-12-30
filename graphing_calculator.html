@@ -117,22 +117,22 @@
             }
         }
         
-        function axisLines() {
+        function axisLines(cx, cy) {
             let pnt = document.getElementById('canvas');
             let can = pnt.getContext('2d');
 
             can.strokeStyle = '#000000';
-            can.moveTo(0, 500);
-            can.lineTo(1000, 500);
+            can.moveTo(0, cy);
+            can.lineTo(1000, cy);
             can.stroke();
 
-            can.moveTo(500, 0);
-            can.lineTo(500, 1000);
+            can.moveTo(cx, 0);
+            can.lineTo(cx, 1000);
             can.stroke();
 
         }
 
-        axisLines();
+        axisLines(300, 500);
 
         
 
