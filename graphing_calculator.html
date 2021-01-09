@@ -71,10 +71,22 @@
 
         }
 
+        function basicLine(a, b, ident) {
+            let pnt = document.getElementById(ident);
+            let can = pnt.getContext('2d');
+
+            can.fillStyle = "#89cff0";
+
+            for (i = 3; i < 1000; i = i + 3) {
+                can.fillRect(i, 600, 2, 2);
+                console.log("Got Called!");
+            }
+        }
+
         
-
+        basicLine( 0, 0, 'canvas');
         axisLines(300, 500, 'canvas');
-
+        
         
 
     </script>
