@@ -89,7 +89,7 @@
             switch(code) {
                 case 'const':
 
-                    let label = createLabel('c');
+                    let label = createLabel('c:  ');
                     let c = createNumInput('num_c' + n);
 
                     panelPnt.appendChild(label);
@@ -99,10 +99,10 @@
                 case 'linear':
                 case 'deg2':
 
-                    let labelA = createLabel('a');
+                    let labelA = createLabel('a:  ');
                     let a = createNumInput('num_a' + n);
 
-                    let labelB = createLabel('b');
+                    let labelB = createLabel('b:  ');
                     let b = createNumInput('num_b' + n);
 
                     panelPnt.appendChild(labelA);
@@ -117,8 +117,8 @@
             }
         }
         
-        function axisLines(cx, cy) {
-            let pnt = document.getElementById('canvas');
+        function axisLines(cx, cy, ident) {
+            let pnt = document.getElementById(ident);
             let can = pnt.getContext('2d');
 
             can.strokeStyle = '#000000';
@@ -132,7 +132,10 @@
 
         }
 
-        axisLines(300, 500);
+        changeInputPanel('graph1', 'input1', '1');
+        changeInputPanel('graph2', 'input2', '2');
+
+        axisLines(300, 500, 'canvas');
 
         
 
