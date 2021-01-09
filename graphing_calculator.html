@@ -16,37 +16,34 @@
         <div id="showEqu"></div>
 
         <p>
-            <select id="comboType">
-                <option value="add">Addition</option>
-                <option value="mult">Multiplication</option>
-            </select>
-
-        </p>
-
-        <p>
             <label>Equation One</label>
             <select onchange="changeInputPanel('graph1', 'input1', '1')" id="graph1">
-                <option value="const">c</option>
-                <option value="linear">a(x + b)</option>
-                <option value="deg2">a(x + b)^2<option>
+                <option value="intersectForm">a(x - b)</option>
+                <option value="basicForm">ax + b<option>
             </select>
 
             <div id="input1">
-                <label>Value</label>
+                <label>a:  </label>
                 <input type="number" min="-10" max="10">
+
+                <label>b:  </label>
+                <input type="number" min="-10" max="10">
+
             </div>
         </p>
 
         <p>
             <label>Equation Two</label>
             <select onchange="changeInputPanel('graph2', 'input2', '2')" id="graph2">
-                <option value="const">c</option>
-                <option value="linear">a(x + b)</option>
-                <option value="deg2">a(x + b)^2</option>
+                <option value="intersectForm">a(x - b)</option>
+                <option value="basicForm">ax + b<option>
             </select>
 
             <div id="input2">
-                <label>Value</label>
+                <label>a:  </label>
+                <input type="number" min="-10" max="10">
+
+                <label>b:  </label>
                 <input type="number" min="-10" max="10">
             </div>
         </p>
@@ -57,65 +54,7 @@
 
     </body>
     <script>
-        function changeInputPanel(inputId, panelId, n) {
-            function createNumInput(id) {
-                let out = document.createElement("input");
-                
-                out.setAttribute('type', 'number');
-                out.setAttribute('min', '-10');
-                out.setAttribute('max', "10");
-                out.setAttribute('id', id);
-                
-                return out;
-            }
-
-            function createLabel(text) {
-                let lab = document.createElement('label');
-                let str = document.createTextNode(text);
-
-                lab.appendChild(str);
-
-                return lab;
-            }
-
-            let code = document.getElementById(inputId).value;
-            let panelPnt = document.getElementById(panelId);
-
-            Array.from(panelPnt.children).forEach(
-                function (e0) {
-                    e0.remove();
-            });
-
-            switch(code) {
-                case 'const':
-
-                    let label = createLabel('c:  ');
-                    let c = createNumInput('num_c' + n);
-
-                    panelPnt.appendChild(label);
-                    panelPnt.appendChild(c);
-
-                    break;
-                case 'linear':
-                case 'deg2':
-
-                    let labelA = createLabel('a:  ');
-                    let a = createNumInput('num_a' + n);
-
-                    let labelB = createLabel('b:  ');
-                    let b = createNumInput('num_b' + n);
-
-                    panelPnt.appendChild(labelA);
-                    panelPnt.appendChild(a);
-                    panelPnt.appendChild(labelB);
-                    panelPnt.appendChild(b);
-
-                    break;
-                
-                default:
-                    console.log('Error, the equation-code is wrong.')
-            }
-        }
+        
         
         function axisLines(cx, cy, ident) {
             let pnt = document.getElementById(ident);
@@ -132,8 +71,7 @@
 
         }
 
-        changeInputPanel('graph1', 'input1', '1');
-        changeInputPanel('graph2', 'input2', '2');
+        
 
         axisLines(300, 500, 'canvas');
 
