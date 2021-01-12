@@ -68,11 +68,16 @@
                 return [a, b];
             }
 
-            console.log(a, b);
         }
 
-        function calcQuad() {
-            //
+        function calcQuad(lin1, lin2) {
+            //Inputs are two arrays with two values a then b in basic form.
+            //Output is an array with three values a, b and c for y = ax^2 + bx + c
+            let a = lin1[0]*lin2[0];
+            let b = lin1[0]*lin2[1] + lin1[1]*lin2[0];
+            let c = lin1[1]*lin2[1];
+
+            return [ a, b, c];
         }
         
         function findCenter() {
@@ -106,19 +111,31 @@
             can.fillStyle = "#89cff0";
 
             for (i = 3; i < 1000; i = i + 3) {
-                let x = i - 300;
+                let x = i - 500;
                 let y = -0.1*x + 500;
                 can.fillRect(i, y, 2, 2);
             }
         }
 
-        
-        basicLine( 0, 0, 'canvas');
-        axisLines(300, 500, 'canvas');
+        axisLines(500, 500, 'canvas');
 
         function run(){
-            console.log( collectConstants('a1', 'b1', 'graph1') );
-            console.log( collectConstants('a2', 'b2', 'graph2') );
+            let eq1 = collectConstants('a1', 'b1', 'graph1');
+            let eq2 = collectConstants('a2', 'b2', 'graph2');
+            
+            //Sanatize
+            let san = eq1.concat(eq2);
+            let doom = san.every( function (e0){ return Number.isNaN(e0) !== true});
+            if (doom !== true) {
+                console.log("Weeding out the NaNs");
+                return
+            }
+
+            basicLine(eq1[0], eq1[1]);
+            basicLine(eq2[0], eq2[1]);
+
+            let quad = calcQuad(eq1, eq2);
+            
         }
        
         
