@@ -17,34 +17,34 @@
 
         <p>
             <label>Equation One</label>
-            <select onchange="changeInputPanel('graph1', 'input1', '1')" id="graph1">
+            <select id="graph1">
                 <option value="intersectForm">a(x - b)</option>
                 <option value="basicForm">ax + b<option>
             </select>
 
             <div id="input1">
                 <label>a:  </label>
-                <input type="number" min="-10" max="10">
+                <input id="a1" type="number" min="-10" max="10">
 
                 <label>b:  </label>
-                <input type="number" min="-10" max="10">
+                <input id="b1" type="number" min="-10" max="10">
 
             </div>
         </p>
 
         <p>
             <label>Equation Two</label>
-            <select onchange="changeInputPanel('graph2', 'input2', '2')" id="graph2">
+            <select id="graph2">
                 <option value="intersectForm">a(x - b)</option>
                 <option value="basicForm">ax + b<option>
             </select>
 
             <div id="input2">
                 <label>a:  </label>
-                <input type="number" min="-10" max="10">
+                <input id="a2" type="number" min="-10" max="10">
 
                 <label>b:  </label>
-                <input type="number" min="-10" max="10">
+                <input id="b2" type="number" min="-10" max="10">
             </div>
         </p>
 
@@ -54,7 +54,33 @@
 
     </body>
     <script>
+
+        function collectConstants(aID, bID, graphID) {
+            //Collects input from user when submit button pushed
+            //Returns array of arrays with slope, x-intercept, and constant value for the linear equations
+            let a = parseInt( document.getElementById(aID).value );
+            let b = parseInt( document.getElementById(bID).value );
+            let code = document.getElementById(graphID).value;
+
+            if(code === 'intersectForm') {
+                return [a, a*b];
+            } else {
+                return [a, b];
+            }
+
+            console.log(a, b);
+        }
+
+        function calcQuad() {
+            //
+        }
         
+        function findCenter() {
+            //Takes in the equation values and determins where the center should be.
+            //Returns an array with two values
+
+            
+        }
         
         function axisLines(cx, cy, ident) {
             let pnt = document.getElementById(ident);
@@ -71,6 +97,8 @@
 
         }
 
+        
+
         function basicLine(a, b, ident) {
             let pnt = document.getElementById(ident);
             let can = pnt.getContext('2d');
@@ -78,14 +106,21 @@
             can.fillStyle = "#89cff0";
 
             for (i = 3; i < 1000; i = i + 3) {
-                can.fillRect(i, 600, 2, 2);
-                console.log("Got Called!");
+                let x = i - 300;
+                let y = -0.1*x + 500;
+                can.fillRect(i, y, 2, 2);
             }
         }
 
         
         basicLine( 0, 0, 'canvas');
         axisLines(300, 500, 'canvas');
+
+        function run(){
+            console.log( collectConstants('a1', 'b1', 'graph1') );
+            console.log( collectConstants('a2', 'b2', 'graph2') );
+        }
+       
         
         
 
