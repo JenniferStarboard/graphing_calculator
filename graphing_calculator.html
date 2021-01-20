@@ -15,36 +15,28 @@
 
         <div id="showEqu"></div>
 
-        <p>
-            <label>Equation One</label>
-            <select id="graph1">
-                <option value="intersectForm">a(x - b)</option>
-                <option value="basicForm">ax + b<option>
-            </select>
+        <p>Equation One: y = ax + b</p>
 
+        <p>
             <div id="input1">
                 <label>a:  </label>
-                <input id="a1" type="number" min="-10" max="10">
+                <input id="a1" type="number" min="-5" max="5">
 
                 <label>b:  </label>
-                <input id="b1" type="number" min="-10" max="10">
+                <input id="b1" type="number" min="-5" max="5">
 
             </div>
         </p>
 
-        <p>
-            <label>Equation Two</label>
-            <select id="graph2">
-                <option value="intersectForm">a(x - b)</option>
-                <option value="basicForm">ax + b<option>
-            </select>
+        <p>Equation Two: y = ax + b</p>
 
+        <p>
             <div id="input2">
                 <label>a:  </label>
-                <input id="a2" type="number" min="-10" max="10">
+                <input id="a2" type="number" min="-5" max="5">
 
                 <label>b:  </label>
-                <input id="b2" type="number" min="-10" max="10">
+                <input id="b2" type="number" min="-5" max="5">
             </div>
         </p>
 
@@ -55,18 +47,13 @@
     </body>
     <script>
 
-        function collectConstants(aID, bID, graphID) {
+        function collectConstants(aID, bID) {
             //Collects input from user when submit button pushed
             //Returns array of arrays with slope, x-intercept, and constant value for the linear equations
             let a = parseInt( document.getElementById(aID).value );
             let b = parseInt( document.getElementById(bID).value );
-            let code = document.getElementById(graphID).value;
 
-            if(code === 'intersectForm') {
-                return [a, a*b];
-            } else {
-                return [a, b];
-            }
+            return [a, b];
 
         }
 
@@ -80,24 +67,20 @@
             return [ a, b, c];
         }
         
-        function findCenter() {
-            //Takes in the equation values and determins where the center should be.
-            //Returns an array with two values
-
-            
-        }
+        
         
         function axisLines(cx, cy, ident) {
             let pnt = document.getElementById(ident);
             let can = pnt.getContext('2d');
+            let canvasSize = parseInt(pnt.getAttribute('width'));
 
             can.strokeStyle = '#000000';
             can.moveTo(0, cy);
-            can.lineTo(1000, cy);
+            can.lineTo(canvasSize, cy);
             can.stroke();
 
             can.moveTo(cx, 0);
-            can.lineTo(cx, 1000);
+            can.lineTo(cx, canvasSize);
             can.stroke();
 
         }
@@ -107,12 +90,17 @@
         function basicLine(a, b, ident) {
             let pnt = document.getElementById(ident);
             let can = pnt.getContext('2d');
+            let canvasSize = parseInt(pnt.getAttribute('width'));
+            let shift = canvasSize/2;
+            let scale = 100;
+
+            console.log(canvasSize);
 
             can.fillStyle = "#89cff0";
 
-            for (i = 1; i < 1000; i = i + 1) {
-                let x = i - 500;
-                let y = a*x + b + 500;
+            for (i = 1; i < canvasSize; i = i + 1) {
+                let x = i - shift -b*scale;
+                let y = -a*x + shift;
                 can.fillRect(i, y, 2, 2);
             }
         }
@@ -137,6 +125,7 @@
             let quad = calcQuad(eq1, eq2);
             
         }
+
        
         
         
