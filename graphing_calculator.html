@@ -73,7 +73,7 @@
 
             for(i = 1; i < canvasSize; i = i + 1){
                 let x = i - shift;
-                let y = -1*(lin1[0]*x + lin1[1])*(lin2[0]*x + lin2[1]) + shift;
+                let y = -1*lin1[0]*x*lin2[0]*x + lin1[0]*lin2[1]*x + lin1[1]*lin2[0]*x + lin2[1]*lin1[1] + shift;
                 can.fillRect(i, y, 2, 2);
                 console.log("got called", y);
             }
@@ -112,7 +112,7 @@
 
             for (i = 1; i < canvasSize; i = i + 1) {
                 let x = i - shift;
-                let y = -a*x + b*scale + shift;
+                let y = -a*x - b*scale + shift;
                 can.fillRect(i, y, 2, 2);
             }
         }
